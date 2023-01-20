@@ -23,7 +23,7 @@ def save_results(results, runtime):
     if len(results['items']) > 0:
         to_save = [(item['played_at'], item['track']['name'], item['track']['artists'][0]['name'])
                    for item in results['items']]
-        with f as open(f'./history/{runtime:%Y-%m-%dT%H%M%S}.tsv', 'w'):
+        with open(f'./history/{runtime:%Y-%m-%dT%H%M%S}.tsv', 'w') as f:
             f.write(to_save)
 
 

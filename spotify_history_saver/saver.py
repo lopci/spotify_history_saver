@@ -4,6 +4,8 @@ import datetime
 from spotify_history_saver import auth, utils
 
 def run_once():
+    sp = auth.spotipy_auth()
+
     current_runtime = datetime.datetime.now()
     last_runtime = utils.get_last_save_time()
     try:
