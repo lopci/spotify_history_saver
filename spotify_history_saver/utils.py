@@ -1,7 +1,5 @@
 import os
 import datetime
-import pandas as pd
-
 
 def get_last_save_time():
     if not os.path.exists('cursor.txt'):
@@ -25,9 +23,8 @@ def save_results(results, runtime):
     if len(results['items']) > 0:
         to_save = [(item['played_at'], item['track']['name'], item['track']['artists'][0]['name'])
                    for item in results['items']]
-        to_save = pd.DataFrame(to_save, columns=['played_at', 'track', 'artist'])
-        # make folder if does not exist
-        to_save.to_csv(f'./history/{runtime:%Y-%m-%dT%H%M%S}.tsv', sep='\t')
+        with f as open(f'./history/{runtime:%Y-%m-%dT%H%M%S}.tsv', 'w'):
+            f.write(to_save)
 
 
 def datetime_to_spotify_timestamp_format(start):
